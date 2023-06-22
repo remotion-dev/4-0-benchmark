@@ -1,54 +1,30 @@
-# Remotion video
+# Remotion OffthreadVideo performance comparison
 
-<p align="center">
-  <a href="https://github.com/remotion-dev/logo">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://github.com/remotion-dev/logo/raw/main/animated-logo-banner-dark.gif">
-      <img alt="Animated Remotion Logo" src="https://github.com/remotion-dev/logo/raw/main/animated-logo-banner-light.gif">
-    </picture>
-  </a>
-</p>
+This repo is for demonstrating and backing up the claim that the `<OffthreadVideo>` component has become twice as fast in Remotion 4.0.
 
-Welcome to your Remotion project!
+Test conditions:
 
-## Commands
+- Macbook Air 2022 M2
+- 4x concurrency
+- Only the "Rendering frames" phase is measured, as it is the only stage where `<OffthreadVideo>` can help.
+- A 4K video is being re-encoded to make the work by `<OffthreadVideo>` the most intensive part.
 
-**Install Dependencies**
+## Results
 
-```console
-npm i
-```
+With `4.0.0-alpha18`:
 
-**Start Preview**
+`npx remotion render`
 
-```console
-npm start
-```
+- Rendered frames (4x) 74957ms
 
-**Render video**
+With packages updated to `3.3.101` and after running `npm i`:
 
-```console
-npm run build
-```
+`npx remotion render --config=remotion-v3.config.ts`
 
-**Upgrade Remotion**
+- Rendered frames (4x) 286116ms
 
-```console
-npm run upgrade
-```
+Making Remotion 4.0's `<OffthreadVideo>` component 281% faster than Remotion 3.3, exceeding our conservative claim of 100% speed improvement significantly.
 
-## Docs
+## Credit
 
-Get started with Remotion by reading the [fundamentals page](https://www.remotion.dev/docs/the-fundamentals).
-
-## Help
-
-We provide help [on our Discord server](https://discord.gg/6VzzNDwUwV).
-
-## Issues
-
-Found an issue with Remotion? [File an issue here](https://github.com/remotion-dev/remotion/issues/new).
-
-## License
-
-Notice that for some entities a company license is needed. Read [the terms here](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md).
+Video from https://www.pexels.com/video/waves-rushing-and-splashing-to-the-shore-1409899/
